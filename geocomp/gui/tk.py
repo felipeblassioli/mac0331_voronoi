@@ -45,7 +45,7 @@ def plot_line (x0, y0, x1, y1, color, linewidth):
 					   fill=color, width=linewidth)
 	return lineto_id
 
-def plot_vert_line (x, color, linewidth):
+def plot_vert_line (x, color, linewidth, y=0):
 	lineto_id = canvas.create_line (canvas.r2cx(x), 0, 
 					   canvas.r2cx(x), int (canvas['height']), 
 					   fill=color, width=linewidth)
@@ -79,8 +79,10 @@ CANVAS_START = -2000
 CANVAS_WIDTH = 2000
 CANVAS_HEIGHT = 2000
 def plot_parabola(focus, directrix, endpoints=None, color='purple'):
+	global CANVAS_START
+	global CANVAS_WIDTH
+	global CANVAS_HEIGHT
 	#print 'plot_parabola', focus, directrix, endpoints
-	a, b = focus[0], focus[1]
 
 	# Plot the parabola
 	if focus[1] == directrix:
@@ -90,7 +92,7 @@ def plot_parabola(focus, directrix, endpoints=None, color='purple'):
 			end = endpoints[1][1]
 		else:
 			end = CANVAS_HEIGHT
-		
+		plot_line(focus[0],directrix,focus[0],end,color=color,linewidth=2)
 		#plt.plot([a,a],[directrix,end],'b-',color=color,linewidth=2)
 	else:
 		start = endpoints[0][0] if endpoints[0] is not None else CANVAS_START
@@ -111,6 +113,9 @@ def plot_parabola(focus, directrix, endpoints=None, color='purple'):
 
 
 def config_canvas (minx, maxx, miny, maxy):
+	global CANVAS_START
+	global CANVAS_WIDTH
+	global CANVAS_HEIGHT
 	for item in canvas.find_all ():
 		canvas.delete (item)
 
@@ -138,7 +143,9 @@ def config_canvas (minx, maxx, miny, maxy):
 			miny = miny - fabs (Dy-new_dy)/2
 			Dy = new_dy
 
-
+	CANVAS_START = ((-0.1/0.8)*Dx) + minx # Valor que garante que rc(CANVAS_WIDTH) = -0.1*width
+	CANVAS_WIDTH = (0.9*maxx-0.1*minx)/0.8 # Valor que garante que rc(CANVAS_WIDTH) = width
+	CANVAS_HEIGHT = ((0.9/0.8)*Dy)+miny	
 	def rx (x, x0 = minx, dx = Dx, width=width):
 		return int ((x - x0) * width*0.8 / dx + 0.1*width)
 		#return int ((x - x0) * int (cv['width'])*0.8 / dx + 0.1*int (cv['width']))

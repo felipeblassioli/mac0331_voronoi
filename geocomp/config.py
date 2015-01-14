@@ -3,7 +3,7 @@
 
 # tamanho da area de desenho
 # WIDTH = 500
-WIDTH = 4000
+WIDTH = 600
 # HEIGHT = 500
 HEIGHT = 600
 
