@@ -75,7 +75,7 @@ class AnimatedVoronoi(VoronoiDiagram, PaperMixin):
 		if not e.is_site:
 			bottom, center, radius = e.bottom, e.center, e.radius
 
-			self.plot_circle(center.x, center.y, radius, outline='blue')
+			self.plot_circle(center.x, center.y, radius, outline='yellow')
 			self.plot_points([bottom], color='green')
 
 		

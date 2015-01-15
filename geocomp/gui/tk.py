@@ -154,7 +154,8 @@ def config_canvas (minx, maxx, miny, maxy):
 			Dy = new_dy
 
 	CANVAS_START = ((-0.1/0.8)*Dx) + minx # Valor que garante que rc(CANVAS_WIDTH) = -0.1*width
-	CANVAS_WIDTH = (0.9*maxx-0.1*minx)/0.8 # Valor que garante que rc(CANVAS_WIDTH) = width
+	#CANVAS_WIDTH = (0.9*maxx-0.1*minx)/0.8 # Valor que garante que rc(CANVAS_WIDTH) = width
+	CANVAS_WIDTH = (maxx-0.2*minx)/0.8 # Valor que garante que rx(CANVAS_WIDTH) = 1.1*width
 	CANVAS_HEIGHT = ((0.9/0.8)*Dy)+miny	
 	def rx (x, x0 = minx, dx = Dx, width=width):
 		return int ((x - x0) * width*0.8 / dx + 0.1*width)
