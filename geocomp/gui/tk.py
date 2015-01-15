@@ -75,6 +75,10 @@ def linspace(start,end, total):
 		yield x
 		x += dx
 
+def fcmp(p,q,epsilon=0.00001):
+	_eq = lambda a, b, t: abs(a - b) < t
+	return _eq(p,q,epsilon)
+
 CANVAS_START = -2000
 CANVAS_WIDTH = 2000
 CANVAS_HEIGHT = 2000
@@ -92,12 +96,18 @@ def plot_parabola(focus, directrix, endpoints=None, color='purple'):
 			end = endpoints[1][1]
 		else:
 			end = CANVAS_HEIGHT
-		plot_line(focus[0],directrix,focus[0],end,color=color,linewidth=2)
+		print '\tplot focus', focus,end, 'C_HEIGHT', CANVAS_HEIGHT
+
+		line = plot_line(focus[0],directrix,focus[0],end,color=color,linewidth=2)
+		return line
 		#plt.plot([a,a],[directrix,end],'b-',color=color,linewidth=2)
 	else:
 		start = endpoints[0][0] if endpoints[0] is not None else CANVAS_START
 		end = endpoints[1][0] if endpoints[1] is not None else CANVAS_WIDTH
-		#print '\tplot focus', focus, start,end
+		print '\tplot focus', focus, start,end
+		if fcmp(start,end):
+			print 'wwtfffffffffffffff'
+			return None
 		lines = []
 		f = lambda x: _parabola(x,focus,directrix)
 		prev = start
